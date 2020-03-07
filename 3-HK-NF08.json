@@ -1,0 +1,107 @@
+{
+
+//  "log": {
+//    "loglevel": "debug", // 日志级别
+//    "access": "/media/AiDisk_a1/v2ray/access.log",  // 这是 Windows 系统的路徿
+//    "error": "/media/AiDisk_a1/v2ray/error.log"
+//  },
+    "inbounds": [
+        {
+            "port": 1234,
+            "listen": "0.0.0.0",
+            "protocol": "dokodemo-door",
+            "settings": {
+                "network": "tcp",
+                "followRedirect": true
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        }
+    ],
+    "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "hk8.crossz.info",
+            "port": 80,
+            "users": [
+              {
+                "id": "8935fb7c-1fed-3bff-bcd1-3c0ec856ca3c",
+                "alterId": 4,
+                "email": "t@t.tt",
+                "security": "auto"
+              }
+            ]
+          }
+        ],
+        "servers": null,
+        "response": null
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": null,
+        "tlsSettings": null,
+        "tcpSettings": null,
+        "kcpSettings": null,
+        "wsSettings": {
+          "connectionReuse": true,
+          "path": "/v2ray",
+          "headers": {
+            "Host": "hk8.hdske.top"
+          }
+        },
+        "httpSettings": null,
+        "quicSettings": null
+      },
+      "mux": {
+        "enabled": true,
+        "concurrency": 8
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {
+        "vnext": null,
+        "servers": null,
+        "response": null
+      },
+      "streamSettings": null,
+      "mux": null
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": {
+        "vnext": null,
+        "servers": null,
+        "response": {
+          "type": "http"
+        }
+      },
+      "streamSettings": null,
+      "mux": null
+    }
+  ],
+    "routing": {
+        "rules": [        
+            {
+                "type": "field",
+                "outboundTag": "direct",
+                "domain": [
+                    //"geosite:cn",
+                    //"domain:sharepoint.com",
+                    "domain:speedtest.net"
+                ]
+            }
+        ]
+    }
+}
